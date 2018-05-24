@@ -1,0 +1,46 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[serbian]{babel}
+
+\usepackage{listings}
+\usepackage{xcolor} % for setting colors
+
+% set the default code style
+\lstset{language=C++,
+     xleftmargin=20pt,
+      basicstyle=\ttfamily,
+      morekeywords={to, downto, then},
+      keywordstyle=\color{blue}\ttfamily,
+      stringstyle=\color{red}\ttfamily,
+      commentstyle=\color{green}\ttfamily,
+      morecomment=[l][\color{magenta}]{\#},
+      numbers=left
+}
+
+\title{Analiza skupa podataka ...}
+\author{Tijana Jevti\' c \\ Jelena Mrdak}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Uvod}
+Uvod.....
+
+\section{Glavni deo}
+u \cite{knjiga1}
+
+\begin{lstlisting}[mathescape=true]
+repeat
+  i = Random(1, n)
+  if x[i] == 1 then return i
+\end{lstlisting}
+
+
+\begin{thebibliography}{9}
+  \bibitem{knjiga1}Knjiga1
+  \bibitem{knjiga2}Knjiga2
+\end{thebibliography}
+
+\end{document}
