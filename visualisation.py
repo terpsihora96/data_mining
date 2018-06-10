@@ -62,7 +62,7 @@ def main():
     plt.legend(weight)
     plt.xlabel(target_attribute)
     print(len(df[df.weight==1]))
-    plt.ylabel("broj  ljudi")
+    plt.ylabel("broj ljudi")
     plt.show()
 
 if __name__ == "__main__":
