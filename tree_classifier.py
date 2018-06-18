@@ -18,6 +18,7 @@ def isFloat(value):
 def main():
     df = pd.read_csv('./food-choices/food_coded.csv')
     # print('\n{}'.format(df.head()))
+
     
     
     # print("\nStatistike skupa:\n{}".format(df.describe()))
@@ -28,6 +29,7 @@ def main():
     attribute_3 = 'eating_out'
 
     df = df[[attribute_1, attribute_2, attribute_3, target_attribute]]
+
     
     """
     print(len(df))
@@ -72,8 +74,9 @@ def main():
 
     df[target_attribute] = df[target_attribute].replace(changes)
 
+
     
-    print("Ispitanici imaju sledece tezine: {}".format(weight))   
+    # print("Ispitanici imaju sledece tezine: {}".format(weight))   
     
     X = df[[attribute_1, attribute_2, attribute_3]]
     y = df[[target_attribute]]

@@ -6,6 +6,22 @@
 \usepackage{listings}
 \usepackage{xcolor} % for setting colors
 
+% text width and height
+\textwidth 16cm
+\textheight 23cm
+
+% distance from the top
+\voffset -1.5cm
+
+% distance from the left
+\hoffset 0cm
+\oddsidemargin 0mm
+
+% distance from the bottom
+\footskip 1.5cm
+
+\linespread{1}
+
 % set the default code style
 \lstset{language=python,
      xleftmargin=20pt,
@@ -15,7 +31,8 @@
       stringstyle=\color{red}\ttfamily,
       commentstyle=\color{green}\ttfamily,
       morecomment=[l][\color{magenta}]{\#},
-      numbers=left
+      numbers=left,
+      basicstyle=\small
 }
 
 \title{Ishrana studenata}
@@ -416,14 +433,187 @@ Skup podataka uklju\v cuje informacije o izboru hrane, ishrani, preferencijama i
 
 
 
-\section{Glavni deo}
-u \cite{knjiga1}
+\section{Primer klasifikacije}
+
+Odredi\' cemo klasifikaciju na osnovu atributa comfort\_food\_reasons\_coded, cook i eating\_out, dok \' ce nam ciljni atribut biti weight.\\
+
+Najpre \' cemo u\v citati podatke i prikazati prvih pet redova.\\
 
 \begin{lstlisting}[mathescape=true]
-repeat
-  i = Random(1, n)
-  if x[i] == 1 then return i
+df = pd.read_csv('./food-choices/food_coded.csv')
+print('\n{}'.format(df.head()))
 \end{lstlisting}
+
+\begin{verbatim}
+  GPA  Gender  breakfast ... waffle_calories                    weight
+0   2.4       2          1 ...            1315                       187
+1 3.654       1          1 ...             900                       155
+2   3.3       1          1 ...             900  I'm not answering this.
+3   3.2       1          1 ...            1315             Not sure, 240
+4   3.5       1          1 ...             760                       190
+\end{verbatim}
+
+Mo\v zemo uraditi osnovnu statistiku za svaku kolonu.
+
+\begin{lstlisting}[mathescape=true]
+print("\nStatistike skupa:\n{}".format(df.describe()))
+\end{lstlisting}
+
+\begin{verbatim}
+Statistike skupa:
+           Gender   breakfast  calories_chicken ... veggies_day    vitamins
+count  125.000000  125.000000        125.000000 ...  125.000000  125.000000
+mean     1.392000    1.112000        577.320000 ...    4.008000    1.512000
+std      0.490161    0.316636        131.214156 ...    1.081337    0.501867
+min      1.000000    1.000000        265.000000 ...    1.000000    1.000000
+25%      1.000000    1.000000        430.000000 ...    3.000000    1.000000
+50%      1.000000    1.000000        610.000000 ...    4.000000    2.000000
+75%      2.000000    1.000000        720.000000 ...    5.000000    2.000000
+max      2.000000    2.000000        720.000000 ...    5.000000    2.000000
+\end{verbatim}
+
+Za algoritam koji \v zelimo da primenimo, izdvoji\' cemo slede\' ce atribute: comfort\_food\_reasons\_coded, cook, eating\_out i weight.
+
+\begin{lstlisting}[mathescape=true]
+target_attribute = 'weight'
+attribute_1 = 'comfort_food_reasons_coded'
+attribute_2 = 'cook'
+attribute_3 = 'eating_out'
+
+df = df[[attribute_1, attribute_2, attribute_3, target_attribute]]
+\end{lstlisting}
+
+\begin{verbatim}
+   comfort_food_reasons_coded  cook  eating_out                    weight
+0                         9.0   2.0           3                       187
+1                         1.0   3.0           2                       155
+2                         1.0   1.0           2  I'm not answering this.
+3                         2.0   2.0           2             Not sure, 240
+4                         1.0   1.0           2                       190
+\end{verbatim}
+
+Kao \v sto mo\v zemo primetiti, nisu sve vrednosti celobrojne. Zato \' cemo obrisati sve redove koji sadr\v ze NaN-ove ili stringove u nekoj od ove \v cetiri kolone. Tako\dj e, vrednosti u koloni weight \' cemo transformisati. Preslika\' cemo ih u skup $\{0, 1, 2\}$.
+
+
+\begin{lstlisting}[mathescape=true]
+df = df.replace('nan', np.nan)
+df = df.dropna()
+
+
+df = df[df[target_attribute].apply(lambda x: str(x).isdigit())]
+
+df.reset_index(drop=True, inplace=True)
+
+df[attribute_1] = df.comfort_food_reasons_coded.astype(int)
+df[attribute_2] = df.cook.astype(int)
+df[attribute_3] = df.eating_out.astype(int)
+df[target_attribute] = df.weight.astype(int)
+
+changes = {}
+weight = df[target_attribute].unique()
+for w in weight:
+    if int(w) <150:
+        changes[w] = 0
+    elif int(w) < 190:
+        changes[w] = 1
+    else:
+        changes[w] = 2
+
+df[target_attribute] = df[target_attribute].replace(changes)
+\end{lstlisting}
+
+\begin{verbatim}
+   comfort_food_reasons_coded  cook  eating_out  weight
+0                           9     2           3       1
+1                           1     3           2       1
+2                           1     1           2       2
+3                           4     3           1       2
+4                           1     2           2       1
+\end{verbatim}
+
+Sada \' cemo izvr\v siti podelu skupa na test i trening skup.
+
+\begin{lstlisting}
+X = df[[attribute_1, attribute_2, attribute_3]]
+y = df[[target_attribute]]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+print("\nVelicina skupa za obucavanje: {}".format(X_train.size))
+print("Velicina skupa za testiranje: {}".format(X_test.size))
+\end{lstlisting}
+
+\begin{verbatim}
+Velicina skupa za obucavanje: 207
+Velicina skupa za testiranje: 90
+\end{verbatim}
+
+Po\v sto smo izvr\v sili podelu skupa, primeni\' cemo algoritam za klasifikaciju - $k$ najbli\v zih suseda.
+
+\begin{lstlisting}
+clf = KNeighborsClassifier(5, 'distance')
+
+# Treniramo model
+clf.fit(X_train, y_train.values.ravel())
+
+# Vrsimo predikciju
+y_test_predicted = clf.predict(X_test)
+y_train_predicted = clf.predict(X_train)
+
+# Izracunavamo preciznost
+train_acc = clf.score(X_train, y_train)
+test_acc = clf.score(X_test, y_test)
+print('train preciznost: {}'.format(train_acc))
+print('test preciznost: {}'.format(test_acc))
+\end{lstlisting}
+
+\begin{verbatim}
+train preciznost: 0.7536231884057971
+test preciznost: 0.7
+\end{verbatim}
+
+Izve\v staj i matricu konfuzije mo\v zemo dobiti na slede\' ci na\v cin:
+
+\begin{lstlisting}
+test_rep = sklearn.metrics.classification_report(y_test, y_test_predicted)
+train_rep = sklearn.metrics.classification_report(y_train, y_train_predicted)
+print("\nTest izvestaj:\n{}".format(test_rep))
+print("Trening izvestaj:\n{}".format(train_rep))
+
+train_conf = sklearn.metrics.confusion_matrix(y_train, y_train_predicted)
+test_conf = sklearn.metrics.confusion_matrix(y_test, y_test_predicted)
+print("Matrica konfuzije za skup za obucavanje:\n{}".format(train_conf))
+print("\nMatrica konfuzije za skup za testiranje:\n{}".format(test_conf))
+\end{lstlisting}
+
+\begin{verbatim}
+Test izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.67      0.91      0.77        11
+          1       0.77      0.67      0.71        15
+          2       0.50      0.25      0.33         4
+
+avg / total       0.70      0.70      0.68        30
+
+Trening izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.74      0.86      0.79        29
+          1       0.73      0.81      0.77        27
+          2       1.00      0.38      0.56        13
+
+avg / total       0.78      0.75      0.74        69
+
+Matrica konfuzije za skup za obucavanje:
+[[25  4  0]
+ [ 5 22  0]
+ [ 4  4  5]]
+
+Matrica konfuzije za skup za testiranje:
+[[10  1  0]
+ [ 4 10  1]
+ [ 1  2  1]]
+\end{verbatim}
 
 
 \begin{thebibliography}{9}
