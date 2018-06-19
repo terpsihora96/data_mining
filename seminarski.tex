@@ -35,7 +35,12 @@
       basicstyle=\small
 }
 
-\title{Ishrana studenata}
+\title{Analiza skupa podataka Food choices}
+\begin{abstract}
+Seminarski rad u okviru kursa
+Istra\' zivanje podataka
+Matemati\v cki fakultet
+\end{abstract}
 \author{Tijana Jevti\' c \\ Jelena Mrdak}
 
 \setlength\parindent{0pt}
@@ -43,7 +48,9 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Koliko su bitne informacije o ishrani dana\v snjim studentima? Da li njihove navike ste\v cene jo\v s u detinjstvu uti\v cu na to koju hranu danas vole da jedu? Koliko uti\v cu njihove kulinarske ve\v stine na na\v cin ishrane?
+Skup podataka Food choices predstavlja skup odgovora studenata sa koledza na odredjena pitanja vezana za njihove navike u ishrani. Dakle, podaci su dobijeni anketiranjem 126 studenata na 60 pitanja razlicitog tipa. Neka pitanja se konkretno ticu njihovih preferenca vezanih za hranu, njihovih navika, dok se kroz ostala dobija vise informacija o njihovom socio-ekonomskom statusu. Sve to zajedno cini bogat skup podataka iz kog se moze zakljuciti dosta zanimljivih pravilnosti.
+
+Koliko se dana\v snji studenti brinu o ishrani i koliko znaju o hrani? Da li njihove navike ste\v cene jo\v s u detinjstvu uti\v cu na to kako se danas hrane? Koliko njihove kulinarske ve\v stine uti\v cu na na\v cin na koji se hrane? Zasto jedu i da li je jedini odgovor zbog gladi? Da li odgovor na prethodno pitanje zavisi od pola?
 
 Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu.
 \end{abstract}
@@ -51,16 +58,14 @@ Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu.
 \tableofcontents
 
 \section{Opis skupa podataka}
-Skup podataka uklju\v cuje informacije o izboru hrane, ishrani, preferencijama i ostalim informacijama dobijenim od studenata na koled\v zu. Postoji 126 odgovora. Podaci su ravni i nisu o\v ci\v s\' ceni.
+Skup podataka - datoteka food$_coded.csv sadrzi sadrzi 60 razlicitih atributa. Podaci su, za sada, neocisceni. U nastavku cemo pomenuti svaki od atributa kako bi se citalac upoznao sa skupom podataka, a posebnu paznju cemo posvetiti onima koje koristimo u istrazivanju.
 
 \begin{itemize}
-  \item GPA\\
-    numeri\v cki, prosek na fakultetu
-  \item Pol\\
-    kategori\v cki\\
+  \item GPA - numeri\v cki, prosek na fakultetu\\
+  \item Pol - kategori\v cki\\
     \textbf{1} - \v zensko\\
     \textbf{2} - mu\v sko
-  \item Doru\v cak\\
+  \item Doru\v cak - koja od 2 ponudjene slike ispitanike vise asocira na dorucak\\
     Ispitanicima je ponu\dj ena slika pahuljica i krofne i treba da ka\v zu \v sta ih asocira na doru\v cak\\
     \textbf{1} - pahuljice\\
     \textbf{2} - krofna 
@@ -68,26 +73,23 @@ Skup podataka uklju\v cuje informacije o izboru hrane, ishrani, preferencijama i
     \textbf{1} - 265\\ 
     \textbf{2} - 430\\
     \textbf{3} - 610\\
-    \textbf{3} - 720
+    \textbf{4} - 720
   \item Da li je bitna koli\v cina kalorija koja se konzumira dnevno\\
     \textbf{1} - ne znam koliko kalorija treba konzumirati dnevno\\
     \textbf{2} - uop\v ste nije bitno\\
     \textbf{3} - umereno je bitno\\
-    \textbf{3} - veoma je bitno
-  \item Procena kalorija u scone from starbucks\\
+    \textbf{4} - veoma je bitno
+  \item Procena kalorija u kolacu iz Starbucks-a\\
     \textbf{1} - 107 cal\\ 
     \textbf{2} - 315 cal\\ 
     \textbf{3} - 420 cal\\ 
-    \textbf{3} - 980 cal
-  \item Kafa\\
-    Ispitanicima su ponu\dj ene dve slike i treba da ka\v zu \v sta ih asocira na kafu.\\
-   \textbf{1} - creamy frapuccino\\
-   \textbf{2} - espreso
-  \item Comfort food\\
-    Ispitanici treba da navedu od 3 do 5 comfort food.
-  \item  comfort food reasons\\
-    Ispitanici treba da navedu do 3 razloga za\v sto jedu comfort food? (npr. tuga, sre\' ca, bes, itd)
-  \item comfort food reasons coded\\
+    \textbf{4} - 980 cal
+  \item Kafa - koja od 2 ponudjene slike ispitanike vise asocira na kafu\\
+  \item Hrana za utehu\\ - koja hrana asocira ispitanike na dom i lepe uspomene, cini ih srecnim
+    Ispitanici treba da navedu izmedju 3 i 5 razlicitih jela.\\
+  \item Zasto posezu za hranom za utehu \\
+    Ispitanici treba da navedu do 3 razloga za\v sto jedu hranu za utehu? (npr. tuga, sre\' ca, bes)\\
+  \item Hrana za utehu - kodirana\\
    \textbf{1} - stres\\
    \textbf{2} - dosada\\
    \textbf{3} - depresija\\
@@ -96,348 +98,130 @@ Skup podataka uklju\v cuje informacije o izboru hrane, ishrani, preferencijama i
    \textbf{6} - hladno vreme \\
    \textbf{7} - sre\'  ca\\ 
    \textbf{8} - gledanje televizije\\
-   \textbf{9} - ni\v sta od navedenog 
+   \textbf{9} - ni\v sta od navedenog\\
+   \item Kuvanje - koliko ispitanici cesto kuvaju\\
+    \textbf{1} - svakog dana\\
+    \textbf{2} - nekoliko dana nedeljno\\
+    \textbf{3} - koliko cesto mogu, ali retko\\
+    \textbf{4} - jedino za praznike\\
+    \textbf{5} - nikada\\
+  \item Koji tip kuhinje su jeli kad su bili mali\\
+    \textbf{1} - americka\\
+    \textbf{2} - meksicka/spanska\\
+    \textbf{3} - korejska/azijska\\
+    \textbf{4} - indijska\\
+    \textbf{5} - americka sa internacionalnim jelima\\
+    \textbf{6} - ostalo\\
+  \item Trenutna dijeta\\
+  \item Trenutna dijeta - kodirano od 1 do 4\\
+  \item Koju sliku asociraju sa picem\\
+  \item Kako se ishrana promenila od kada su na koledzu\\
+  \item Kako se ishrana promenila\\
+    \textbf{1} - na losija\\
+    \textbf{2} - na bolje\\
+    \textbf{3} - isto\\
+    \textbf{4} - nije sigurno\\
+  \item Kako se ishrana promenila u terminima toga sta jedu\\
+  \item Prejedanje - koliko se ispitanici cesto prejedaju tokom nedelje\\
+    \textbf{1} - nikad\\
+    \textbf{2} - 1 do 2 puta\\
+    \textbf{3} - 2 do 3 puta\\
+    \textbf{4} - 3 do 5 puta\\
+    \textbf{5} - svaki dan\\
+  \item Zaposlenje - da li su zaposleni
+    \textbf{1} - da, puno radno vreme\\
+    \textbf{2} - da, poluradno vreme\\
+    \textbf{3} - ne\\
+    \textbf{4} - drugo\\
+  \item 
+  \item Vezbanje - koliko puta nedeljno vezbaju\\
+    \textbf{1} - svakodnevno\\
+    \textbf{2} - 2 do 3 puta\\
+    \textbf{3} - jednom\\
+    \textbf{4} - ponekad\\
+    \textbf{5} - nikad\\
+  \item Ocevo obrazovanje\\
+  \item Oceva profesija\\
+  \item Omiljena vrsta kuhinje\\
+  \item Omiljena vrsta kuhinje - kodirano\\
+  \item Omiljena hrana - kuvana ili kupljena\\
+    \textbf{1} - kuvana kod kuce\\
+    \textbf{2} - kupljena u prodavnici\\
+    \textbf{3} - oba\\
+  \item Omiljena hrana iz detinjstva\\
+  \item Koja od 2 slike ih vise asocira sa krompiricima\\
+  \item Voce - koliko je verovatno da ce pojesti voce tokom dana\\
+    \textbf{1} - vrlo verovatno\\
+    \textbf{2} - ne toliko verovatno\\
+    \textbf{3} - onako\\
+    \textbf{4} - verovatno\\
+    \textbf{5} - vrlo verovatno\\
+  \item Godina na koledzu\\
+  \item Grcka hrana - koliko je verovatno da bi je jeli\\
+  \item Koliko se zdravo osecaju od 1 do 10\\
+  \item Sta je, po njihovim recima, zdrav obrok\\
+  \item Sta je, po njihovim recima, idealna ishrana\\
+  \item Idealna ishrana - kodirano\\
+  \item Zarada - koliko zaradjuju godisnje\\
+    \textbf{1} - manje od 15 000 dolara\\
+    \textbf{2} - 15 001 - 30 000 dolara\\
+    \textbf{3} - 30 001 - 50 000 dolara\\
+    \textbf{4} - 50 001 - 70 000 dolara\\
+    \textbf{5} - 70 001 - 100 000 dolara\\
+    \textbf{6} - vise od 100 000 dolara\\
+  \item Indijska hrana - koliko je verovatno da bi je jeli\\
+  \item Italijanska hrana - koliko je verovatno da bi je jeli\\
+  \item Koliko je zivot lep od 1 do 10\\
+  \item Bracni zivot\\
+    \textbf{1} - slobodan/slobodna\\
+    \textbf{2} - u vezi\\
+    \textbf{3} - zivi sa partnerom\\
+    \textbf{4} - udat/ozenjen\\
+    \textbf{5} - razveden/a\\
+    \textbf{6} - udovica\\
+  \item Sta bi posluzili kao veceru prijatelju\\
+  \item Majcino obrazovanje\\
+  \item Majcina profesija\\
+  \item Koliko cesto proveravaju kolicinu kalorija hrane koje konzumiraju\\
+  \item Da li zive ili ne na kampusu\\
+  \item Koliko puta nedeljno roditelji kuvaju\\
+    \textbf{1} - skoro svaki dan\\
+    \textbf{2} - 2 do 3 puta\\
+    \textbf{3} - 1 do 2 puta\\
+    \textbf{4} - za vreme odmora\\
+    \textbf{5} - nikad\\
+  \item Placanje obroka - koliko bi novca potrosili na obrok\\
+  \item Persijska hrana - koliko je verovatno da bi je jeli\\
+  \item Procena sopstvene tezine\\
+    \textbf{1} - vitak/vitka\\
+    \textbf{2} - vrlo utreniran/utrenirana\\
+    \textbf{3} - tacno kako treba\\
+    \textbf{4} - pomalo debeo/debela\\
+    \textbf{5} - debeo/debela\\
+    \textbf{6} - ne razmisljam o tome kada mislim o sebi\\
+  \item Koja od 2 slike ih vise asocira sa supom\\
+  \item Sport - da li se bave sportom\\
+    \textbf{1} - da\\
+    \textbf{2} - ne\\
+    \textbf{99} - bez odgovora\\
+  \item Tajlandska hrana - koliko je verovatno da bi je jeli\\
+  \item Koliko tortilja ima kalorija\\
+  \item Koliko guska ima kalorija\\
+  \item Sport - kojim sportom se bave\\
+  \item Povrce - koliko je verovatno da jedu povrce na dnevnoj bazi\\
+  \item Vitamini - da li uzimaju dodatne vitamine\\
+  \item Koliko vafl ima kalorija\\
+  \item Tezina (u funtama: 1kg = 2.20462 funti)\\
 \end{itemize}
-
-
-
-
-
-
-% 11) cook – how often do you cook?
-% 1 - Every day 
-% 2 - A couple of times a week 
-% 3 - Whenever I can, but that is not very often  
-% 4 - I only help a little during holidays 
-% 5 - Never, I really do not know my way around a kitchen
-
-% 12) cuisine – what type of cuisine did you eat growing up?
-% 1 – American
-% 2 – Mexican.Spanish
-% 3 – Korean/Asian
-% 4 – Indian
-% 5 – American inspired international dishes
-% 6 – other
-
-% (lots of cleaning needed for this variable)
-
-% 13) diet_current – describe your current diet
-% open ended – ideal for NLP
-	
-
-% 14) diet_current_coded
-% (based on words used to describe the diet)
-
-% 1 – healthy/balanced/moderated/
-% 2 – unhealthy/cheap/too much/random/
-% 3 – the same thing over and over
-% 4 – unclear
-
-
-% 15) which picture do you associate with the word “drink”?
-% 1 – orange juice
-% 2 – soda 
-
-
-
-
-
-% 16) eating_changes  - Describe your eating changes since the moment you got into college?
-% Open ended 
-
-% 17) eating_changes_coded
-
-% 1 – worse
-% 2 – better
-% 3 – the same
-% 4 – unclear
-
-
-% 18) eating_changes_coded1
-% 1 – eat faster
-% 2 – bigger quantity
-% 3 – worse quality 
-% 4 – same food
-% 5 – healthier
-% 6 – unclear
-% 7 – drink coffee 
-% 8 – less food
-% 9 – more sweets
-% 10 – timing 
-% 11 – more carbs or snacking
-% 12 – drink more water
-% 13 – more variety
-
-
-% 19) eating_out - frequency of eating out in a typical week 
-% 1 - Never 
-% 2 - 1-2 times 
-% 3 - 2-3 times 
-% 4 - 3-5 times 
-% 5 - every day
-
-
-% 20) employment – do you work? 
-% 1 - yes full time 
-% 2 - yes part time 
-% 3 – no
-% 4  - other
-
-
-% 21) ethnic_food - How likely to eat ethnic food 
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-% 22) exercise – how often do you exercise in a regular week?
-% 1 - Everyday 
-% 2 - Twice or three times per week 
-% 3 - Once a week
-% 4 - Sometimes 
-% 5 – Never
-
-% 23) father_education – 
-% 1 - less than high school 
-% 2 - high school degree 
-% 3 - some college degree 
-% 4 - college degree 
-% 5 - graduate degree 
-
-
-% 24) father_profession – what is your father profession?
-% Open ended
-
-% 25) fav_cuisine - What is your favorite cuisine?
-% Open ended
-
-% 26) fav_cuisine_coded
-
-% 0-none
-% 1 – Italian/French/greek
-% 2 – Spanish/mexican
-% 3 – Arabic/Turkish
-% 4 – asian/chineses/thai/nepal
-% 5 – American
-% 6 – African 
-% 7 – Jamaican
-% 8 – indian
-
-
-% 27) fav_food - was your favorite food cooked at home or store bought? 
-% 1 - cooked at home 
-% 2 - store bought 
-% 3 - both bought at store and cooked at home
-
-% 28) food_childhood – what was your favorite childhood food?
-% Open ended
-
-
-% 29) which of these pictures you associate with word fries? 
-% 1 – Mcdonald’s fries
-% 2 – home fries
-
-
-
-
-% 30) fruit_day - How likely to eat fruit in a regular day 
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-
-% 31) grade_level – 
-% 1 - freshman 
-% 2 -Sophomore 
-% 3 - Junior 
-% 4 - Senior
-
-% 32) greek_food - How likely to eat greek food when available?
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-% 33) healthy_feel – how likely are you to agree with the following statement: “I feel very healthy!” ?
-% 1 to 10 where 1 is strongly agree and 10 is strongly disagree - scale
-
-% 34) healthy_meal – what is a healthy meal? Describe in 2-3 sentences.
-% Open ended
-
-% 35) ideal_diet – describe your ideal diet in 2-3 sentences
-% Open ended
-
-% 36) Ideal_diet_coded
-
-% 1 – portion control
-% 2 – adding veggies/eating healthier food/adding fruit	
-% 3 – balance
-% 4 – less sugar
-% 5 – home cooked/organic
-% 6 – current diet
-% 7 – more protein
-% 8 – unclear
-
-% 37) income
-% 1 - less than $15,000 
-% 2 - $15,001 to $30,000 
-% 3 - $30,001 to $50,000 
-% 4 - $50,001 to $70,000 
-% 5 - $70,001 to $100,000 
-% 6 - higher than $100,000
-
-% 38) indian_food – how likely are you to eat indian food when available
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-
-% 39) Italian_food – how likely are you to eat Italian food when available?
-
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-% 40) life_rewarding – how likely are you to agree with the following statement: “I feel life is very rewarding!” ?
-% 1 to 10 where 1 is strongly agree and 10 is strongly disagree - scale
-
-% 41) marital_status
-% 1 -Single 
-% 2 - In a relationship 
-% 3 - Cohabiting 
-% 4 - Married 
-% 5 - Divorced 
-% 6 - Widowed
-
-
-% 42) meals_dinner_friend – What would you serve to a friend for dinner?
-% Open ended
-
-% 43) mothers_education 
-% 1 - less than high school 
-% 2 - high school degree 
-% 3 - some college degree 
-% 4 - college degree 
-% 5 - graduate degree
-
-% 44) mothers_profession – what is your mother’s profession? 
-
-% 45) nutritional_check - checking nutritional values frequency 
-% 1 - never 
-% 2 - on certain products only 
-% 3 - very rarely 
-% 4 - on most products 
-% 5 - on everything
-
-% 46) on_off_campus – living situation
-% 1 - On campus 
-% 2 - Rent out of campus 
-% 3 - Live with my parents and commute 
-% 4 - Own my own house
-
-% 47) parents_cook - Approximately how many days a week did your parents cook? 
-% 1 - Almost everyday 
-% 2 - 2-3 times a week 
-% 3 - 1-2 times a week 
-% 4 - on holidays only 
-% 5 - never
-
-% 48) pay_meal_out - How much would you pay for meal out? 
-% 1 - up to $5.00 
-% 2 - $5.01 to $10.00 
-% 3 - $10.01 to $20.00 
-% 4 - $20.01 to $30.00 
-% 5 - $30.01 to $40.00 
-% 6 - more than $40.01 
-
-% 49) Persian_food - How likely to eat persian food when available?
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-% 50) self_perception_weight - self perception of weight 
-% 6 - i dont think myself in these terms 
-% 5 - overweight 
-% 4 - slightly overweight 
-% 3 - just right 
-% 2 - very fit 
-% 1 - slim 
-
-% 51) Which of the two pictures you associate with the word soup?
-% 1 – veggie soup
-% 2 – creamy soup
-
-
-
-
-
-% 52) sports - sports – do you do any sporting activity?
- 
-% 1 - Yes 
-% 2 - No 
-% 99 – no answer
-
-% 53) thai_food - How likely to eat thai food when available?
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4 - likely 
-% 5 - very likely 
-
-% 54) tortilla_calories - guessing calories in a burrito sandwhich from Chipolte?
-
-% 1 - 580 
-% 2 - 725 
-% 3 - 940 
-% 4 - 1165
-
-% 55) turkey_calories - Can you guess how many calories are in the foods shown below? (Panera Bread Roasted Turkey and Avocado BLT)
-
-% 1 - 345 
-% 2 - 500 
-% 3 - 690 
-% 4 - 850
-
-
-% 56) type_sports – what type of sports are you involved?
-% Open-ended
-
-% 57) veggies_day - How likely to eat veggies in a day? 
-% 1 - very unlikely 
-% 2 - unlikely 
-% 3 - neutral 
-% 4- likely 
-% 5 - very likely
-
-% 58) vitamins – do you take any supplements or vitamins?
-% 1 – yes
-% 2 – no
-
-% 59) waffle_calories - guessing calories in waffle potato sandwhich 
-% 1 - 575 
-% 2 - 760 
-% 3 - 900 
-% 4 - 1315
-
-% 60) weight – what is your weight in pounds? 
-
-
 
 \section{Primer klasifikacije}
 
 Odredi\' cemo klasifikaciju na osnovu atributa comfort\_food\_reasons\_coded, cook i eating\_out, dok \' ce nam ciljni atribut biti weight.\\
 
 Najpre \' cemo u\v citati podatke i prikazati prvih pet redova.\\
+
+\section{Glavni deo}
+u \cite{knjiga1}
 
 \begin{lstlisting}[mathescape=true]
 df = pd.read_csv('./food-choices/food_coded.csv')
