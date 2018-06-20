@@ -7,6 +7,7 @@ import sklearn.metrics
 import matplotlib.pyplot as plt
 import sys
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 
 def isFloat(value):
   try:
@@ -51,18 +52,18 @@ def main():
     df[target_attribute] = df[target_attribute].replace(changes)
     weight = df[target_attribute].unique()
 
-    colors = ['red', 'blue', 'green']
-    """for (v, color) in zip(weight, colors):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    
+    colors = ['green', 'blue','red']
+    for (v, color) in zip(weight, colors):
         subsamples = df.loc[df[target_attribute] == v]
-        print(len(subsamples))
-        print(subsamples)
-        #plt.scatter(subsamples[attribute_1], subsamples[attribute_2], color=color, s=70, alpha=0.3)
-        break"""
-    plt.hist(df[target_attribute])
-    plt.legend(weight)
-    plt.xlabel(target_attribute)
-    print(len(df[df.weight==1]))
-    plt.ylabel("broj ljudi")
+        ax.scatter(subsamples[attribute_1], subsamples[attribute_2], subsamples[attribute_3],color=color, s=70, alpha=0.3)
+
+    ax.set_xlabel('comfort_food_reasons_coded')
+    ax.set_ylabel('cook')
+    ax.set_zlabel('eating_out')
     plt.show()
 
 if __name__ == "__main__":

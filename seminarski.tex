@@ -2,6 +2,8 @@
 
 \usepackage[serbian]{babel}
 
+\usepackage{graphicx}
+\usepackage{float}
 
 \usepackage{listings}
 \usepackage{xcolor} % for setting colors
@@ -390,6 +392,33 @@ Matrica konfuzije za skup za testiranje:
  [ 4 10  1]
  [ 1  2  1]]
 \end{verbatim}
+
+\section{Vizuelizacija podataka}
+
+
+\begin{lstlisting}
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+
+colors = ['green', 'blue','red']
+for (v, color) in zip(weight, colors):
+    subsamples = df.loc[df[target_attribute] == v]
+    ax.scatter(subsamples[attribute_1], 
+               subsamples[attribute_2], 
+               subsamples[attribute_3],
+               color=color, s=70, alpha=0.3)
+
+ax.set_xlabel('comfort_food_reasons_coded')
+ax.set_ylabel('cook')
+ax.set_zlabel('eating_out')
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{3dgrafik.png}
+\end{figure}
 
 
 \begin{thebibliography}{9}
