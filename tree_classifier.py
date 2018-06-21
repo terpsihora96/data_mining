@@ -24,11 +24,9 @@ def main():
     # print("\nStatistike skupa:\n{}".format(df.describe()))
 
     target_attribute = 'weight'
-    attribute_1 = 'comfort_food_reasons_coded'
-    attribute_2 = 'cook'
-    attribute_3 = 'eating_out'
+    attributes = [ 'exercise', 'Gender' , 'eating_out']
 
-    df = df[[attribute_1, attribute_2, attribute_3, target_attribute]]
+    df = df[[attributes[0], attributes[1], attributes[2],target_attribute]]
 
     
     """
@@ -51,39 +49,52 @@ def main():
 
     df = df.replace('nan', np.nan)
     df = df.dropna()
-  
+
 
     df = df[df[target_attribute].apply(lambda x: str(x).isdigit())]
-    
+    # df = df[df['GPA'].apply(lambda x: isFloat(str(x)))]
+
     df.reset_index(drop=True, inplace=True)
-    
-    df[attribute_1] = df.comfort_food_reasons_coded.astype(int)
-    df[attribute_2] = df.cook.astype(int)
-    df[attribute_3] = df.eating_out.astype(int)
+
+    df[attributes[0]] = df.exercise.astype(int)
+    df[attributes[1]] = df.Gender.astype(int)
+    df[attributes[2]] = df.eating_out.astype(int)
+    # df[attributes[3]] = df.GPA.astype(float)
+    # df[attributes[4]] = df.employment.astype(int)
+    # df[attributes[5]] = df.breakfast.astype(int)
+    # df[attributes[6]] = df.calories_chicken.astype(int)
+    # df[attributes[7]] = df.calories_day.astype(int)
+    # df[attributes[8]] = df.coffee.astype(int)
+    # df[attributes[9]] = df.diet_current_coded.astype(int)
+    # df[attributes[10]] = df.drink.astype(int)
+    # df[attributes[11]] = df.cook.astype(int)
     df[target_attribute] = df.weight.astype(int)
 
     changes = {}
     weight = df[target_attribute].unique()
     for w in weight:
-        if int(w) <150:
+        if int(w) <=128:
             changes[w] = 0
-        elif int(w) < 190:
+        elif int(w) <= 155:
             changes[w] = 1
-        else:
+        elif int(w) <= 180:
             changes[w] = 2
+        else:
+            changes[w] = 3
 
     df[target_attribute] = df[target_attribute].replace(changes)
 
 
-    
     # print("Ispitanici imaju sledece tezine: {}".format(weight))   
     
-    X = df[[attribute_1, attribute_2, attribute_3]]
-    y = df[[target_attribute]]
+    features =attributes 
+    X = df.loc[:, features]
+    y = df.loc[:,[target_attribute]]
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
     print("\nVelicina skupa za obucavanje: {}".format(X_train.size))
     print("Velicina skupa za testiranje: {}".format(X_test.size))
+
 
     
     # clf = DecisionTreeClassifier(criterion='entropy')
