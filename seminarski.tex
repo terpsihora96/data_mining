@@ -41,30 +41,72 @@
 
 \setlength\parindent{0pt}
 
+\newpage
+
 \begin{document}
 \maketitle
+
+\newpage
+
 \begin{abstract}
-Skup podataka Food choices predstavlja skup odgovora studenata sa koledza na odredjena pitanja vezana za njihove navike u ishrani. Dakle, podaci su dobijeni anketiranjem 126 studenata na 60 pitanja razlicitog tipa. Neka pitanja se konkretno ticu njihovih preferenca vezanih za hranu, njihovih navika, dok se kroz ostala dobija vise informacija o njihovom socio-ekonomskom statusu. Sve to zajedno cini bogat skup podataka iz kog se moze zakljuciti dosta zanimljivih pravilnosti.
+Skup podataka Food choices predstavlja skup odgovora studenata sa koledza na odre\dj ena pitanja vezana za njihove navike u ishrani. Dakle, podaci su dobijeni anketiranjem 125 studenata na 61 pitanje razli\v citog tipa. Neka pitanja se konkretno ti\v cu njihovih preferenca vezanih za hranu, njihovih navika, dok se kroz ostala dobija vi\v se informacija o njihovom socio-ekonomskom statusu. Sve to zajedno \v cini bogat skup podataka iz kog se moze zaklju\v citi dosta zanimljivih pravilnosti.
 
-Koliko se dana\v snji studenti brinu o ishrani i koliko znaju o hrani? Da li njihove navike ste\v cene jo\v s u detinjstvu uti\v cu na to kako se danas hrane? Koliko njihove kulinarske ve\v stine uti\v cu na na\v cin na koji se hrane? Zasto jedu i da li je jedini odgovor zbog gladi? Da li odgovor na prethodno pitanje zavisi od pola?
+\v Sta dana\v snji studenti na koled\v zu najvi\v se vole da jedu? Koliko \v cesto kuvaju? Zasto jedu i da li je jedini odgovor zbog gladi? Koliko to \v sto se prejedaju i razlozi zbog kojih konzumiraju svoju omiljenu hranu uti\v u na njihovu te\v zinu?
 
-Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu.
+Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu koriste\' ci programski jezik python i adekvatne biblioteke.
 \end{abstract}
+
+\newpage
 
 \tableofcontents
 
+\newpage
+
 \section{Opis skupa podataka}
-Skup podataka - datoteka food\_coded.csv sadrzi sadrzi 60 razlicitih atributa. Podaci su, za sada, neocisceni. U nastavku cemo pomenuti svaki od atributa kako bi se citalac upoznao sa skupom podataka, a posebnu paznju cemo posvetiti onima koje koristimo u istrazivanju.
+Za po\v cetak \' cemo se povr\v sno upoznati sa skupom podataka koji se nalazi u datoteci food\_coded.csv.
+\\
+\begin{lstlisting}[mathescape=true]
+df = pd.read_csv('./food_coded.csv', na_values="none")
+print(data.shape)
+\end{lstlisting}
+Skup podataka je u\v citan, nedostaju\' ce vrednosti su obele\v zene sa none i izlaz je:
+\begin{verbatim}
+(125, 61)
+\end{verbatim}
+Skup se sastoji od 61 atributa i 125 redova.\\
+Atribute dobijamo: 
+\begin{lstlisting}[mathescape=true]
+print(data.columns)
+\end{lstlisting}
+Spisak svih atributa:
+\begin{verbatim}
+Index(['GPA', 'Gender', 'breakfast', 'calories_chicken', 'calories_day',
+       'calories_scone', 'coffee', 'comfort_food', 'comfort_food_reasons',
+       'comfort_food_reasons_coded', 'cook', 'comfort_food_reasons_coded.1',
+       'cuisine', 'diet_current', 'diet_current_coded', 'drink',
+       'eating_changes', 'eating_changes_coded', 'eating_changes_coded1',
+       'eating_out', 'employment', 'ethnic_food', 'exercise',
+       'father_education', 'father_profession', 'fav_cuisine',
+       'fav_cuisine_coded', 'fav_food', 'food_childhood', 'fries', 'fruit_day',
+       'grade_level', 'greek_food', 'healthy_feeling', 'healthy_meal',
+       'ideal_diet', 'ideal_diet_coded', 'income', 'indian_food',
+       'italian_food', 'life_rewarding', 'marital_status',
+       'meals_dinner_friend', 'mother_education', 'mother_profession',
+       'nutritional_check', 'on_off_campus', 'parents_cook', 'pay_meal_out',
+       'persian_food', 'self_perception_weight', 'soup', 'sports', 'thai_food',
+       'tortilla_calories', 'turkey_calories', 'type_sports', 'veggies_day',
+       'vitamins', 'waffle_calories', 'weight'],
+      dtype='object')
+\end{verbatim}
+
+U nastavku \' cemo pomenuti svaki od atributa kako bi se \v citalac upoznao sa skupom podataka, a posebnu pa\v znju \' cemo posvetiti onima koje koristimo u istra\v zivanju.
 
 \begin{itemize}
-  \item GPA - numeri\v cki, prosek na fakultetu\\
+  \item GPA - numeri\v cki, prosek na fakultetu
   \item Pol - kategori\v cki\\
     \textbf{1} - \v zensko\\
     \textbf{2} - mu\v sko
-  \item Doru\v cak - koja od 2 ponudjene slike ispitanike vise asocira na dorucak\\
-    Ispitanicima je ponu\dj ena slika pahuljica i krofne i treba da ka\v zu \v sta ih asocira na doru\v cak\\
-    \textbf{1} - pahuljice\\
-    \textbf{2} - krofna 
+  \item Doru\v cak - koja od 2 ponudjene slike ispitanike vi\v se asocira na doru\v cak
   \item Procena kalorija u jednom par\v cetu piletine\\
     \textbf{1} - 265\\ 
     \textbf{2} - 430\\
@@ -75,16 +117,16 @@ Skup podataka - datoteka food\_coded.csv sadrzi sadrzi 60 razlicitih atributa. P
     \textbf{2} - uop\v ste nije bitno\\
     \textbf{3} - umereno je bitno\\
     \textbf{4} - veoma je bitno
-  \item Procena kalorija u kolacu iz Starbucks-a\\
+  \item Procena kalorija u kola\v cu iz Starbucks-a\\
     \textbf{1} - 107 cal\\ 
     \textbf{2} - 315 cal\\ 
     \textbf{3} - 420 cal\\ 
     \textbf{4} - 980 cal
-  \item Kafa - koja od 2 ponudjene slike ispitanike vise asocira na kafu\\
-  \item Hrana za utehu\\ - koja hrana asocira ispitanike na dom i lepe uspomene, cini ih srecnim
-    Ispitanici treba da navedu izmedju 3 i 5 razlicitih jela.\\
-  \item Zasto posezu za hranom za utehu \\
-    Ispitanici treba da navedu do 3 razloga za\v sto jedu hranu za utehu? (npr. tuga, sre\' ca, bes)\\
+  \item Kafa - koja od 2 ponu\dj ene slike ispitanike vi\v se asocira na kafu
+  \item Hrana za utehu - koja hrana asocira ispitanike na dom i lepe uspomene, \v cini ih sre\' cnim
+    Ispitanici treba da navedu izmedju 3 i 5 razli\v citih jela.
+  \item Za\v sto pose\v zu za hranom za utehu \\
+    Ispitanici treba da navedu do 3 razloga za\v sto jedu hranu za utehu (npr. tuga, sre\' ca, bes)
   \item Hrana za utehu - kodirana\\
    \textbf{1} - stres\\
    \textbf{2} - dosada\\
@@ -94,129 +136,226 @@ Skup podataka - datoteka food\_coded.csv sadrzi sadrzi 60 razlicitih atributa. P
    \textbf{6} - hladno vreme \\
    \textbf{7} - sre\'  ca\\ 
    \textbf{8} - gledanje televizije\\
-   \textbf{9} - ni\v sta od navedenog\\
+   \textbf{9} - ni\v sta od navedenog
    \item Kuvanje - koliko ispitanici cesto kuvaju\\
     \textbf{1} - svakog dana\\
     \textbf{2} - nekoliko dana nedeljno\\
-    \textbf{3} - koliko cesto mogu, ali retko\\
+    \textbf{3} - koliko \v cesto mogu, ali retko\\
     \textbf{4} - jedino za praznike\\
-    \textbf{5} - nikada\\
+    \textbf{5} - nikada
   \item Koji tip kuhinje su jeli kad su bili mali\\
-    \textbf{1} - americka\\
-    \textbf{2} - meksicka/spanska\\
+    \textbf{1} - ameri\v cka\\
+    \textbf{2} - meksi\v cka/\v spanska\\
     \textbf{3} - korejska/azijska\\
     \textbf{4} - indijska\\
-    \textbf{5} - americka sa internacionalnim jelima\\
-    \textbf{6} - ostalo\\
-  \item Trenutna dijeta\\
-  \item Trenutna dijeta - kodirano od 1 do 4\\
-  \item Koju sliku asociraju sa picem\\
-  \item Kako se ishrana promenila od kada su na koledzu\\
+    \textbf{5} - ameri\v cka sa internacionalnim jelima\\
+    \textbf{6} - ostalo
+  \item Trenutna dijeta
+  \item Trenutna dijeta - kodirano od 1 do 4
+  \item Koju sliku asociraju sa picem
+  \item Kako se ishrana promenila od kada su na koledzu
   \item Kako se ishrana promenila\\
-    \textbf{1} - na losija\\
+    \textbf{1} - na lo\v sije\\
     \textbf{2} - na bolje\\
     \textbf{3} - isto\\
-    \textbf{4} - nije sigurno\\
-  \item Kako se ishrana promenila u terminima toga sta jedu\\
-  \item Prejedanje - koliko se ispitanici cesto prejedaju tokom nedelje\\
+    \textbf{4} - nije sigurno
+  \item Kako se ishrana promenila u terminima toga \v sta jedu
+  \item Prejedanje - koliko se ispitanici \v cesto prejedaju tokom nedelje\\
     \textbf{1} - nikad\\
     \textbf{2} - 1 do 2 puta\\
     \textbf{3} - 2 do 3 puta\\
     \textbf{4} - 3 do 5 puta\\
-    \textbf{5} - svaki dan\\
+    \textbf{5} - svaki dan
   \item Zaposlenje - da li su zaposleni
     \textbf{1} - da, puno radno vreme\\
     \textbf{2} - da, poluradno vreme\\
     \textbf{3} - ne\\
-    \textbf{4} - drugo\\
-  \item 
-  \item Vezbanje - koliko puta nedeljno vezbaju\\
+    \textbf{4} - drugo
+  \item Lokalna hrana - koliko je verovatno da bi jeli hranu sa nekom podru\v cja
+  \item Ve\v zbanje - koliko puta nedeljno ve\v zbaju\\
     \textbf{1} - svakodnevno\\
     \textbf{2} - 2 do 3 puta\\
     \textbf{3} - jednom\\
     \textbf{4} - ponekad\\
-    \textbf{5} - nikad\\
-  \item Ocevo obrazovanje\\
-  \item Oceva profesija\\
-  \item Omiljena vrsta kuhinje\\
-  \item Omiljena vrsta kuhinje - kodirano\\
+    \textbf{5} - nikad
+  \item O\v cevo obrazovanje
+  \item O\v ceva profesija
+  \item Omiljena vrsta kuhinje
+  \item Omiljena vrsta kuhinje - kodirano
   \item Omiljena hrana - kuvana ili kupljena\\
-    \textbf{1} - kuvana kod kuce\\
+    \textbf{1} - kuvana kod ku\' ce\\
     \textbf{2} - kupljena u prodavnici\\
-    \textbf{3} - oba\\
-  \item Omiljena hrana iz detinjstva\\
-  \item Koja od 2 slike ih vise asocira sa krompiricima\\
-  \item Voce - koliko je verovatno da ce pojesti voce tokom dana\\
+    \textbf{3} - oba
+  \item Omiljena hrana iz detinjstva
+  \item Koja od 2 slike ih vi\v se asocira sa krompiri\' cima
+  \item Vo\' ce - koliko je verovatno da \'ce pojesti vo\'ce tokom dana\\
     \textbf{1} - vrlo verovatno\\
     \textbf{2} - ne toliko verovatno\\
     \textbf{3} - onako\\
     \textbf{4} - verovatno\\
-    \textbf{5} - vrlo verovatno\\
-  \item Godina na koledzu\\
-  \item Grcka hrana - koliko je verovatno da bi je jeli\\
-  \item Koliko se zdravo osecaju od 1 do 10\\
-  \item Sta je, po njihovim recima, zdrav obrok\\
-  \item Sta je, po njihovim recima, idealna ishrana\\
-  \item Idealna ishrana - kodirano\\
-  \item Zarada - koliko zaradjuju godisnje\\
+    \textbf{5} - vrlo verovatno
+  \item Godina na koledzu
+  \item Gr\v cka hrana - koliko je verovatno da bi je jeli
+  \item Koliko se zdravo ose\' caju od 1 do 10
+  \item \v Sta je, po njihovim re\v cima, zdrav obrok
+  \item \v Sta je, po njihovim re\v cima, idealna ishrana
+  \item Idealna ishrana - kodirano
+  \item Zarada - koliko zara\dj uju godi\v snje\\
     \textbf{1} - manje od 15 000 dolara\\
     \textbf{2} - 15 001 - 30 000 dolara\\
     \textbf{3} - 30 001 - 50 000 dolara\\
     \textbf{4} - 50 001 - 70 000 dolara\\
     \textbf{5} - 70 001 - 100 000 dolara\\
-    \textbf{6} - vise od 100 000 dolara\\
-  \item Indijska hrana - koliko je verovatno da bi je jeli\\
-  \item Italijanska hrana - koliko je verovatno da bi je jeli\\
-  \item Koliko je zivot lep od 1 do 10\\
-  \item Bracni zivot\\
+    \textbf{6} - vi\v se od 100 000 dolara
+  \item Indijska hrana - koliko je verovatno da bi je jeli
+  \item Italijanska hrana - koliko je verovatno da bi je jeli
+  \item Koliko je \v zivot lep od 1 do 10
+  \item Bra\v cni zivot\\
     \textbf{1} - slobodan/slobodna\\
     \textbf{2} - u vezi\\
-    \textbf{3} - zivi sa partnerom\\
-    \textbf{4} - udat/ozenjen\\
+    \textbf{3} - \v zivi sa partnerom\\
+    \textbf{4} - udat/o\v zenjen\\
     \textbf{5} - razveden/a\\
-    \textbf{6} - udovica\\
-  \item Sta bi posluzili kao veceru prijatelju\\
-  \item Majcino obrazovanje\\
-  \item Majcina profesija\\
-  \item Koliko cesto proveravaju kolicinu kalorija hrane koje konzumiraju\\
-  \item Da li zive ili ne na kampusu\\
+    \textbf{6} - udovica
+  \item \v Sta bi poslu\v zili kao ve\v ceru prijatelju
+  \item Maj\v cino obrazovanje
+  \item Maj\v cina profesija
+  \item Koliko \v cesto proveravaju koli\v cinu kalorija hrane koje konzumiraju
+  \item Da li \v zive ili ne na kampusu
   \item Koliko puta nedeljno roditelji kuvaju\\
     \textbf{1} - skoro svaki dan\\
     \textbf{2} - 2 do 3 puta\\
     \textbf{3} - 1 do 2 puta\\
     \textbf{4} - za vreme odmora\\
-    \textbf{5} - nikad\\
-  \item Placanje obroka - koliko bi novca potrosili na obrok\\
-  \item Persijska hrana - koliko je verovatno da bi je jeli\\
-  \item Procena sopstvene tezine\\
+    \textbf{5} - nikad
+  \item Pla\' canje obroka - koliko bi novca potro\v sili na obrok
+  \item Persijska hrana - koliko je verovatno da bi je jeli
+  \item Procena sopstvene te\v zine\\
     \textbf{1} - vitak/vitka\\
     \textbf{2} - vrlo utreniran/utrenirana\\
-    \textbf{3} - tacno kako treba\\
+    \textbf{3} - ta\v cno kako treba\\
     \textbf{4} - pomalo debeo/debela\\
     \textbf{5} - debeo/debela\\
-    \textbf{6} - ne razmisljam o tome kada mislim o sebi\\
-  \item Koja od 2 slike ih vise asocira sa supom\\
+    \textbf{6} - ne razmi\v sljam o tome kada mislim o sebi
+  \item Koja od 2 slike ih vis\v e asocira sa supom
   \item Sport - da li se bave sportom\\
     \textbf{1} - da\\
     \textbf{2} - ne\\
-    \textbf{99} - bez odgovora\\
-  \item Tajlandska hrana - koliko je verovatno da bi je jeli\\
-  \item Koliko tortilja ima kalorija\\
-  \item Koliko guska ima kalorija\\
-  \item Sport - kojim sportom se bave\\
-  \item Povrce - koliko je verovatno da jedu povrce na dnevnoj bazi\\
-  \item Vitamini - da li uzimaju dodatne vitamine\\
-  \item Koliko vafl ima kalorija\\
-  \item Tezina (u funtama: 1kg = 2.20462 funti)\\
+    \textbf{99} - bez odgovora
+  \item Tajlandska hrana - koliko je verovatno da bi je jeli
+  \item Koliko tortilja ima kalorija
+  \item Koliko guska ima kalorija
+  \item Sport - kojim sportom se bave
+  \item Povr\' ce - koliko je verovatno da jedu povr\' ce na dnevnoj bazi
+  \item Vitamini - da li uzimaju dodatne vitamine
+  \item Koliko vafl ima kalorija
+  \item Te\v zina (u funtama: 1kg = 2.20462 funti)\\
 \end{itemize}
+
+\newpage
+
+\section{Detaljnije upoznavanje sa skupom podataka}
+
+Pogledajmo koliko ima ispitanika kog pola:
+\begin{lstlisting}[mathescape=true]
+  
+  # kolonu Gender prebacujemo u brojevni tip i stampamo dobijene tabele
+  # zenski pol je kodiran brojem 1, a muski brojem 2
+
+  data.Gender = data.Gender.astype(int)
+  print(data[data['Gender'] == 1])
+  print(data[data['Gender'] == 2])
+
+\end{lstlisting}
+Nakon prvog ispisa dobijamo tabelu koja je sa\v cinjena samo od ispitanika koji su \v zenskog pola i prvih nekoliko redova izgleda ovako:
+\begin{verbatim}
+         GPA  Gender            ...       waffle_calories                    weight
+1      3.654       1            ...                   900                       155
+2        3.3       1            ..                    900  I'm not answering this.
+3        3.2       1            ...                  1315             Not sure, 240
+4        3.5       1            ...                   760                       190
+5       2.25       1            ...                  1315                       190
+7        3.3       1            ...                  1315                       137
+8        3.3       1            ...                   760                       180
+\end{verbatim}
+Nakon drugog ispisa dobijamo tabelu koja je sa\v cinjena samo od ispitanika koji su mu\v skog pola i prvih nekoliko redova izgleda ovako:
+\begin{verbatim}
+            GPA  Gender  breakfast   ...    vitamins  waffle_calories  weight
+0           2.4       2          1   ...           1             1315     187
+6           3.8       2          1   ...           1             1315     180
+12          3.4       2          1   ...           2              575     264
+14          3.1       2          1   ...           1              900     185
+15          NaN       2          2   ...           2             1315     180
+17          3.6       2          1   ...           2              900     170
+\end{verbatim}
+Ukupno ima 76 ispitanika koji su \v zenskog pola, 46 koji su mu\v skog.
+\\ \\
+Ve\' c iz ovako jednostavnog baratanja podacima mo\v zemo zaklju\v citi ne\v sto: \\
+na osnovu podataka koje imamo - mu\v skarci nemaju problem da ka\v zu koliko su te\v ski, \v sto se mo\v ze videti iz toga da postoje podaci za skoro sve mu\v ske osobe kada je kolona weight u pitanju. Kada se pogleda kolona weight za \v zenske ispitanike vidi se da postoje neke od njih koje imaju problem da ka\v zu svoju te\v zinu.
+\\ \\
+Podatke \'cemo grupisati po polu i onda izra\v cunati mean za svaki od atributa i mo\v zda zaklju\v citi jo\v s ne\v sto.
+
+\begin{lstlisting}[mathescape=true]
+  # pravi se novi skup gde su podaci grupisani na osnovu pola ispitanika
+  # u nasem slucaju ce biti grupisani u 2 reda
+
+  groupby_gender = data.groupby('Gender')
+
+  # kako nije moguce videti ceo skup, 
+  # skup se mora odstampati na poseban nacin
+
+  with pd.option_context('display.max_rows', \
+    None, 'display.max_columns', 100):
+    print(groupby_gender.mean())
+\end{lstlisting}
+
+Izdvojene su neke, nama interesantne, kolone:
+\begin{verbatim}   
+Gender  comfort_food_reasons_coded      cook  
+1                         2.419355  2.527027   
+2                         3.090909  3.187500 
+        
+Gender  eating_out  exercise   healthy_feeling 
+1         2.552632  1.661538          5.328947
+2         2.571429  1.489362          5.653061      
+          
+Gender   self_perception_weight    veggies_day
+1        3.320000                     4.131579
+2        2.816327                     3.816327
+\end{verbatim}
+
+Na osnovu srednje vrednosti svake kolone posebno za mu\v skarce i posebno za \v zene vidimo da, u proseku, \v zene svoju omiljenu hranu konzumiraju iz dosade i depresivnog raspolo\v zenja, dok mu\v skarci najvi\v se zbog depresivnog rasplo\v zenja. \\
+Sa druge strane, potpuno o\v cekivano, \v zene kuvaju \v sto \v ces\' ce mogu. Za mu\v skarce se mo\v ze ni\v sta zaklju\v citi na osnovu srednje vrednosti ovog atributa koja je 3.18 i ta\v cno izme\dj u odgovora da kuvaju kad god mogu i da kuvaju jako retko. \\
+Pripadnici oba pola se prose\v cno prejedaju i ve\v zbaju jednako. Na pitanje koliko se zdravo ose\' caju su odgovorili otprilike pribli\v zno. \\
+Na to kako procenjuju svoju te\v inu, ve\' cina mu\v skaraca je odgovorila da se ose\' ca utrenirano, dok su \v zene ponovo malo nesigurnije - odgovori su izme\dj u "otprilike kako treba" i "malo ugojeno".
+U isto vreme, \v sansa da \v zene jedu povr\' ce dnevno je za nijansu ve\' ca od onih koju procenjujemo za mu\v ske ispitanike.
+
+\begin{lstlisting}[mathescape=true]
+  # korisno je i pogledati skup
+  # nad citavim skupom, tacnije, za svaku kolonu
+  # napravice se histogram
+
+  data.hist()
+  plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{hist.png}
+\end{figure}
+
+Na osnovu histograma se jednostavno zaklju\v cuje da ima mnogo vi\v se \ zena, na primer. Za pitanja - atribute, koja su oblika "Od ponu\dj ene dve slike izabrati...", lako se mo\v ze dobiti odgovor \v sta su ljudi odgovarali u proseku. \\
+Tako, velika ve\' cina njih je na pitanje \v sta za njih predstavlja doru\v cak odgovorila sa "\v zitarice", velika ve\' cina njih misli da je umereno va\v zno koliko se kalorija unosi dnevno. Veliki broj ispitanika svoju omiljenu hranu jede iz dosade, zbog stresa i depresije, dok zanemarljiv broj njih jede zbog gladi (\v sto bi trebalo da je glavni razlog zbog koga konzumiramo hranu). Tako\dj e, ve\' cina njih se bavi fizi\v ckom aktivno\v s\' cu. Na osnovu nekoliko histograma, mo\v ze se videti da je veliki broj ispitanika ljubitelj italijanske hrane: paste, testenina, pice, dok jako veliki broj njih ne bi okusilo indijsku hranu.
+
+\newpage
 
 \section{Primer klasifikacije}
 
-Odredi\' cemo klasifikaciju na osnovu atributa comfort\_food\_reasons\_coded, cook i eating\_out, dok \' ce nam ciljni atribut biti weight.\\
-
-Najpre \' cemo u\v citati podatke i prikazati prvih pet redova.\\
+Klasifikova\' cemo podatke na osnovu atributa comfort\_food\_reasons\_coded, cook i eating\_out, dok \' ce nam ciljni atribut biti weight.\\
 
 \begin{lstlisting}[mathescape=true]
+# najpre cemo ucitati podatke i prikazati prvih pet redova
+
 df = pd.read_csv('./food-choices/food_coded.csv')
 print('\n{}'.format(df.head()))
 \end{lstlisting}
@@ -269,8 +408,9 @@ df = df[[attribute_1, attribute_2, attribute_3, target_attribute]]
 4                         1.0   1.0           2                       190
 \end{verbatim}
 
-Kao \v sto mo\v zemo primetiti, nisu sve vrednosti celobrojne. Zato \' cemo obrisati sve redove koji sadr\v ze NaN-ove ili stringove u nekoj od ove \v cetiri kolone. Tako\dj e, vrednosti u koloni weight \' cemo transformisati. Preslika\' cemo ih u skup $\{0, 1, 2\}$.
-
+Kao \v sto mo\v zemo primetiti, nisu sve vrednosti celobrojne. Zato \' cemo obrisati sve redove koji sadr\v ze NaN-ove ili niske u nekoj od ove \v cetiri kolone. Tako\dj e, vrednosti u koloni weight \' cemo transformisati. Preslika\' cemo ih u skup $\{0, 1, 2\}$. Dakle, \v zelimo da klasifikujemo ispitanike po te\v zini, u 3 grupe, u zavisnosti od toga koliko se \v cesto prejedaju, koliko \v cesto kuvaju i za\v sto jedu hranu za utehu. U prvu grupu spadaju oni koji su te\v ski do 150 funti (oko 70kg), u drugu oni koji imaju izme\dj u 70kg i 90 kg i u tre\' cu grupu oni sa preko 90kg.
+\\ \\
+Prvo se bri\v su nedostaju\' ce vrednosti.
 
 \begin{lstlisting}[mathescape=true]
 df = df.replace('nan', np.nan)
@@ -289,7 +429,7 @@ df[target_attribute] = df.weight.astype(int)
 changes = {}
 weight = df[target_attribute].unique()
 for w in weight:
-    if int(w) <150:
+    if int(w) < 150:
         changes[w] = 0
     elif int(w) < 190:
         changes[w] = 1
@@ -392,41 +532,22 @@ Matrica konfuzije za skup za testiranje:
  [ 1  2  1]]
 \end{verbatim}
 
+Kao \v sto se mo\v ze videti iz matrica konfuzije za test i trening skup, podaci su dosta dobro klasifikovani - broj ta\v cno klasifikovanih je dosta veliki, za razliku od onih koji to nisu.
+
+\newpage
+
 \section{Vizuelizacija podataka}
 
 Atributi koje posmatramo:
 \begin{itemize}
   \item self\_perception\_weight\\
     procena sopstvene te\v zine
-    \begin{enumerate}
-        \item i dont think myself in these terms 
-        \item overweight 
-        \item slightly overweight 
-        \item just right 
-        \item very fit 
-        \item slim 
-    \end{enumerate}
   \item fruit\_day\\
-    dnevna konzumacija vo\' ca
-    \begin{enumerate}
-        \item very unlikely
-        \item unlikely 
-        \item neutral 
-        \item likely 
-        \item very likely 
-    \end{enumerate}
+    Koliko je verovatno da bi pojeli vo\' ce u toku dana
   \item pay\_meal\_out\\
-    Koliko biste platili za jedan obrok?
-    \begin{enumerate}
-        \item up to 5.00
-        \item 5.01 to 10.00 
-        \item 10.01 to 20.00    
-        \item 20.01 to 30.00
-        \item 30.01 to 40.00 
-        \item more than 40.01 
-   \end{enumerate}
+    Koliko bi platili za jedan obrok?
    \item weight\\
-     Unesite svoju te\v zinu.
+     Te\v zina
 \end{itemize}
 
 \begin{lstlisting}
@@ -512,6 +633,9 @@ plt.show()
       numbers=none,
       basicstyle=\small
 }
+
+Kori\v s\' cenjem PCA algoritma \' cemo redukovati skup na manji, zadr\v zavaju\' ci ve\' cinu informacija iz inicijalnog skupa podataka.
+
 \begin{lstlisting}
 from sklearn.decomposition import PCA
 import pandas as pd
@@ -526,10 +650,10 @@ def isFloat(value):
   except ValueError:
     return False
 
-# read data
 df = pd.read_csv('./food-choices/food_coded.csv')
 
-# choose attributes
+# odabir atributa
+
 target_attribute = 'weight'
 attributes = [ 'exercise','Gender','eating_out',
                'GPA','employment','breakfast', 
@@ -542,19 +666,23 @@ df = df[[attributes[0],attributes[1],attributes[2],
          attributes[9],attributes[10],attributes[11],
          target_attribute]]
 
-# data preprocessing
+# obrada podataka
+# brisanje redova sa nedostajucim vrednostima,
+# konvertovanje podataka u odgovarajuce
+# kako bi se moglo raditi sa njima
 
-# remove NaN values
 df = df.replace('nan', np.nan)
 df = df.dropna()
 
-# clean data
 df = df[df[target_attribute].apply(lambda x: str(x).isdigit())]
 df = df[df['GPA'].apply(lambda x: isFloat(str(x)))]
 
 df.reset_index(drop=True, inplace=True)
 
-# convert values to numbers
+# podaci su tipa float, a potrebno je
+# da budu tipa int, pa se u narednim
+# koracima vrsi konverzija
+
 df[attributes[0]] = df.exercise.astype(int)
 df[attributes[1]] = df.Gender.astype(int)
 df[attributes[2]] = df.eating_out.astype(int)
@@ -569,7 +697,15 @@ df[attributes[10]] = df.drink.astype(int)
 df[attributes[11]] = df.cook.astype(int)
 df[target_attribute] = df.weight.astype(int)
 
-# transform target attribute
+# transformisanje ciljnog atributa
+# preslikacemo sve vrednosti weight atributa
+# u skup {0, 1, 2, 3}
+# ispitanici:
+# sa manje od 58.5kg spadaju u grupu 0
+# izmedju 58.5 i 70kg spadaju u grupu 1
+# izmedju 70 i 81.6kg spadaju u grupu 2
+# sa preko 81.6kg spadaju u grupu 3
+
 changes = {}
 weight = df[target_attribute].unique()
 
@@ -585,7 +721,6 @@ for w in weight:
 
 df[target_attribute] = df[target_attribute].replace(changes)
 weight = df[target_attribute].unique()
-
 
 features = attributes 
 
@@ -628,11 +763,6 @@ plt.show()
   \includegraphics[width=15cm]{pca.png}
 \end{figure}
 
-
-
-\begin{thebibliography}{9}
-  \bibitem{knjiga1}Knjiga1
-  \bibitem{knjiga2}Knjiga2
-\end{thebibliography}
+Na osnovu grafika zaklju\v cujemo da najve\' ci broj ispitanika ima izme\dj u 58.5kg i 70kg.
 
 \end{document}
