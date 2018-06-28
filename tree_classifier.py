@@ -97,11 +97,11 @@ def main():
 
 
     
-    # clf = DecisionTreeClassifier(criterion='entropy')
-    # clf = DecisionTreeClassifier(criterion='gini')
+    #clf = DecisionTreeClassifier(criterion='entropy')
+    clf = DecisionTreeClassifier(criterion='gini')
 
     #clf = RandomForestClassifier(n_estimators=31)
-    clf = KNeighborsClassifier(5, 'distance')
+    #clf = KNeighborsClassifier(5, 'distance')
 
     # Treniramo model
     clf.fit(X_train, y_train.values.ravel())

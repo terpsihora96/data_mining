@@ -46,14 +46,12 @@
 \begin{document}
 \maketitle
 
-\newpage
-
 \begin{abstract}
-Skup podataka Food choices predstavlja skup odgovora studenata sa koledza na odre\dj ena pitanja vezana za njihove navike u ishrani. Dakle, podaci su dobijeni anketiranjem 125 studenata na 61 pitanje razli\v citog tipa. Neka pitanja se konkretno ti\v cu njihovih preferenca vezanih za hranu, njihovih navika, dok se kroz ostala dobija vi\v se informacija o njihovom socio-ekonomskom statusu. Sve to zajedno \v cini bogat skup podataka iz kog se moze zaklju\v citi dosta zanimljivih pravilnosti.
+Skup podataka Food choices predstavlja skup odgovora studenata sa koled\v za na odre\dj ena pitanja vezana za njihove navike u ishrani. Dakle, podaci su dobijeni anketiranjem 125 studenata na 61 pitanje razli\v citog tipa. Neka pitanja se konkretno ti\v cu njihovih preferenca vezanih za hranu, njihovih navika, dok se kroz ostala dobija vi\v se informacija o njihovom socio-ekonomskom statusu. Sve to zajedno \v cini bogat skup podataka iz kog se moze zaklju\v citi dosta zanimljivih pravilnosti.
 
-\v Sta dana\v snji studenti na koled\v zu najvi\v se vole da jedu? Koliko \v cesto kuvaju? Zasto jedu i da li je jedini odgovor zbog gladi? Koliko to \v sto se prejedaju i razlozi zbog kojih konzumiraju svoju omiljenu hranu uti\v u na njihovu te\v zinu?
+\v Sta dana\v snji studenti na koled\v zu najvi\v se vole da jedu? Koliko \v cesto kuvaju? Za\v sto jedu i da li je jedini odgovor zbog gladi? Koliko to \v sto konzumiraju prekomerne koli\v cine hrane i razlozi zbog kojih konzumiraju svoju omiljenu hranu uti\v cu na njihovu te\v zinu?
 
-Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu koriste\' ci programski jezik python i adekvatne biblioteke.
+Na ova i jo\v s mnogobrojna pitanja, poku\v sa\' cemo da odgovorimo u ovom radu koriste\' ci programski jezik python i adekvatne biblioteke, kao i alat Knime.
 \end{abstract}
 
 \newpage
@@ -160,7 +158,7 @@ U nastavku \' cemo pomenuti svaki od atributa kako bi se \v citalac upoznao sa s
     \textbf{3} - isto\\
     \textbf{4} - nije sigurno
   \item Kako se ishrana promenila u terminima toga \v sta jedu
-  \item Prejedanje - koliko se ispitanici \v cesto prejedaju tokom nedelje\\
+  \item Konzumiranje prekomernih koli\v cina hrane - koliko \v cesto to rade tokom nedelje\\
     \textbf{1} - nikad\\
     \textbf{2} - 1 do 2 puta\\
     \textbf{3} - 2 do 3 puta\\
@@ -290,7 +288,7 @@ Nakon drugog ispisa dobijamo tabelu koja je sa\v cinjena samo od ispitanika koji
 \end{verbatim}
 Ukupno ima 76 ispitanika koji su \v zenskog pola, 46 koji su mu\v skog.
 \\ \\
-Ve\' c iz ovako jednostavnog baratanja podacima mo\v zemo zaklju\v citi ne\v sto: \\
+Ve\' c nakon ovako jednostavnog manipulisanja podacima mo\v zemo zaklju\v citi ne\v sto: \\
 na osnovu podataka koje imamo - mu\v skarci nemaju problem da ka\v zu koliko su te\v ski, \v sto se mo\v ze videti iz toga da postoje podaci za skoro sve mu\v ske osobe kada je kolona weight u pitanju. Kada se pogleda kolona weight za \v zenske ispitanike vidi se da postoje neke od njih koje imaju problem da ka\v zu svoju te\v zinu.
 \\ \\
 Podatke \'cemo grupisati po polu i onda izra\v cunati mean za svaki od atributa i mo\v zda zaklju\v citi jo\v s ne\v sto.
@@ -325,8 +323,8 @@ Gender   self_perception_weight    veggies_day
 \end{verbatim}
 
 Na osnovu srednje vrednosti svake kolone posebno za mu\v skarce i posebno za \v zene vidimo da, u proseku, \v zene svoju omiljenu hranu konzumiraju iz dosade i depresivnog raspolo\v zenja, dok mu\v skarci najvi\v se zbog depresivnog rasplo\v zenja. \\
-Sa druge strane, potpuno o\v cekivano, \v zene kuvaju \v sto \v ces\' ce mogu. Za mu\v skarce se mo\v ze ni\v sta zaklju\v citi na osnovu srednje vrednosti ovog atributa koja je 3.18 i ta\v cno izme\dj u odgovora da kuvaju kad god mogu i da kuvaju jako retko. \\
-Pripadnici oba pola se prose\v cno prejedaju i ve\v zbaju jednako. Na pitanje koliko se zdravo ose\' caju su odgovorili otprilike pribli\v zno. \\
+Sa druge strane, potpuno o\v cekivano, \v zene kuvaju \v sto \v ces\' ce mogu. Za mu\v skarce se ne mo\v ze ni\v sta zaklju\v citi na osnovu srednje vrednosti ovog atributa koja je 3.18 i ta\v cno izme\dj u odgovora da kuvaju kad god mogu i da kuvaju jako retko. \\
+Pripadnici oba pola prose\v cno konzumiraju prekomerne koli\v cine hrane i ve\v zbaju jednako. Na pitanje koliko se zdravo ose\' caju su odgovorili otprilike pribli\v zno. \\
 Na to kako procenjuju svoju te\v inu, ve\' cina mu\v skaraca je odgovorila da se ose\' ca utrenirano, dok su \v zene ponovo malo nesigurnije - odgovori su izme\dj u "otprilike kako treba" i "malo ugojeno".
 U isto vreme, \v sansa da \v zene jedu povr\' ce dnevno je za nijansu ve\' ca od onih koju procenjujemo za mu\v ske ispitanike.
 
@@ -344,12 +342,12 @@ U isto vreme, \v sansa da \v zene jedu povr\' ce dnevno je za nijansu ve\' ca od
   \includegraphics[width=15cm]{hist.png}
 \end{figure}
 
-Na osnovu histograma se jednostavno zaklju\v cuje da ima mnogo vi\v se \ zena, na primer. Za pitanja - atribute, koja su oblika "Od ponu\dj ene dve slike izabrati...", lako se mo\v ze dobiti odgovor \v sta su ljudi odgovarali u proseku. \\
+Na osnovu histograma se jednostavno zaklju\v cuje da ima mnogo vi\v se \v zena, na primer. Za pitanja - atribute, koja su oblika "Od ponu\dj ene dve slike izabrati...", lako se mo\v ze dobiti odgovor \v sta su ljudi odgovarali u proseku. \\
 Tako, velika ve\' cina njih je na pitanje \v sta za njih predstavlja doru\v cak odgovorila sa "\v zitarice", velika ve\' cina njih misli da je umereno va\v zno koliko se kalorija unosi dnevno. Veliki broj ispitanika svoju omiljenu hranu jede iz dosade, zbog stresa i depresije, dok zanemarljiv broj njih jede zbog gladi (\v sto bi trebalo da je glavni razlog zbog koga konzumiramo hranu). Tako\dj e, ve\' cina njih se bavi fizi\v ckom aktivno\v s\' cu. Na osnovu nekoliko histograma, mo\v ze se videti da je veliki broj ispitanika ljubitelj italijanske hrane: paste, testenina, pice, dok jako veliki broj njih ne bi okusilo indijsku hranu.
 
 \newpage
 
-\section{Primer klasifikacije}
+\section{Klasifikacija}
 
 Klasifikova\' cemo podatke na osnovu atributa comfort\_food\_reasons\_coded, cook i eating\_out, dok \' ce nam ciljni atribut biti weight.\\
 
@@ -408,7 +406,7 @@ df = df[[attribute_1, attribute_2, attribute_3, target_attribute]]
 4                         1.0   1.0           2                       190
 \end{verbatim}
 
-Kao \v sto mo\v zemo primetiti, nisu sve vrednosti celobrojne. Zato \' cemo obrisati sve redove koji sadr\v ze NaN-ove ili niske u nekoj od ove \v cetiri kolone. Tako\dj e, vrednosti u koloni weight \' cemo transformisati. Preslika\' cemo ih u skup $\{0, 1, 2\}$. Dakle, \v zelimo da klasifikujemo ispitanike po te\v zini, u 3 grupe, u zavisnosti od toga koliko se \v cesto prejedaju, koliko \v cesto kuvaju i za\v sto jedu hranu za utehu. U prvu grupu spadaju oni koji su te\v ski do 150 funti (oko 70kg), u drugu oni koji imaju izme\dj u 70kg i 90 kg i u tre\' cu grupu oni sa preko 90kg.
+Kao \v sto mo\v zemo primetiti, nisu sve vrednosti celobrojne. Zato \' cemo obrisati sve redove koji sadr\v ze NaN-ove ili niske u nekoj od ove \v cetiri kolone. Tako\dj e, vrednosti u koloni weight \' cemo transformisati. Preslika\' cemo ih u skup $\{0, 1, 2\}$. Dakle, \v zelimo da klasifikujemo ispitanike po te\v zini, u 3 grupe, u zavisnosti od toga koliko \v cesto konzumiraju prekomerne koli\v cine hrane, koliko \v cesto kuvaju i za\v sto jedu hranu za utehu. U prvu grupu spadaju oni koji su te\v ski do 150 funti (oko 70kg), u drugu oni koji imaju izme\dj u 70kg i 90 kg i u tre\' cu grupu oni sa preko 90kg.
 \\ \\
 Prvo se bri\v su nedostaju\' ce vrednosti.
 
@@ -458,6 +456,8 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 print("\nVelicina skupa za obucavanje: {}".format(X_train.size))
 print("Velicina skupa za testiranje: {}".format(X_test.size))
 \end{lstlisting}
+
+\subsection{Klasifikacija kori\v s\' cenjem algoritma $K$ najbli\v zih suseda}
 
 \begin{verbatim}
 Velicina skupa za obucavanje: 207
@@ -533,6 +533,374 @@ Matrica konfuzije za skup za testiranje:
 \end{verbatim}
 
 Kao \v sto se mo\v ze videti iz matrica konfuzije za test i trening skup, podaci su dosta dobro klasifikovani - broj ta\v cno klasifikovanih je dosta veliki, za razliku od onih koji to nisu.
+
+\subsection{Klasifikacija kori\v s\' cenjem algoritma Random forest}
+
+\begin{verbatim}
+Velicina skupa za obucavanje: 225
+Velicina skupa za testiranje: 99
+\end{verbatim}
+
+\begin{lstlisting}
+
+# eksperimentalno je utvrdjeno da algoritam
+# daje najbolje rezultate kada se poziva
+# sa parametrom 31
+
+clf = RandomForestClassifier(n_estimators=31)
+
+# Treniramo model
+clf.fit(X_train, y_train.values.ravel())
+
+# Vrsimo predikciju
+y_test_predicted = clf.predict(X_test)
+y_train_predicted = clf.predict(X_train)
+
+# Izracunavamo preciznost
+train_acc = clf.score(X_train, y_train)
+test_acc = clf.score(X_test, y_test)
+print('train preciznost: {}'.format(train_acc))
+print('test preciznost: {}'.format(test_acc))
+\end{lstlisting}
+
+Preciznost je jako lo\v sa kada se koristi ovaj algoritam.
+\begin{verbatim}
+train preciznost: 0.6266666666666667
+test preciznost: 0.36363636363636365
+\end{verbatim}
+
+Izve\v staj i matricu konfuzije mo\v zemo dobiti na slede\' ci na\v cin:
+
+\begin{lstlisting}
+test_rep = sklearn.metrics.classification_report(y_test, y_test_predicted)
+train_rep = sklearn.metrics.classification_report(y_train, y_train_predicted)
+print("\nTest izvestaj:\n{}".format(test_rep))
+print("Trening izvestaj:\n{}".format(train_rep))
+
+train_conf = sklearn.metrics.confusion_matrix(y_train, y_train_predicted)
+test_conf = sklearn.metrics.confusion_matrix(y_test, y_test_predicted)
+print("Matrica konfuzije za skup za obucavanje:\n{}".format(train_conf))
+print("\nMatrica konfuzije za skup za testiranje:\n{}".format(test_conf))
+\end{lstlisting}
+
+\begin{verbatim}
+Test izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.50      0.33      0.40         6
+          1       0.31      0.56      0.40         9
+          2       0.36      0.44      0.40         9
+          3       0.50      0.11      0.18         9
+
+avg / total       0.41      0.36      0.34        33
+
+Train izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.50      0.33      0.40         9
+          1       0.69      0.73      0.71        30
+          2       0.57      0.81      0.67        21
+          3       0.71      0.33      0.45        15
+
+avg / total       0.64      0.63      0.61        75
+
+Matrica konfuzije za skup za obucavanje:
+[[ 3  4  2  0]
+ [ 2 22  5  1]
+ [ 1  2 17  1]
+ [ 0  4  6  5]]
+
+Matrica konfuzije za skup za testiranje:
+[[2 4 0 0]
+ [2 5 2 0]
+ [0 4 4 1]
+ [0 3 5 1]]
+\end{verbatim}
+
+\subsection{Klasifikacija kori\v s\' cenjem stabla odlu\v civanja (kriterijum: entropija)}
+
+\begin{verbatim}
+Velicina skupa za obucavanje: 225
+Velicina skupa za testiranje: 99
+\end{verbatim}
+
+\begin{lstlisting}
+# vrsi se klasifikacija koriscenjem entropije
+clf = DecisionTreeClassifier(criterion='entropy')
+
+# Treniramo model
+clf.fit(X_train, y_train.values.ravel())
+
+# Vrsimo predikciju
+y_test_predicted = clf.predict(X_test)
+y_train_predicted = clf.predict(X_train)
+
+# Izracunavamo preciznost
+train_acc = clf.score(X_train, y_train)
+test_acc = clf.score(X_test, y_test)
+print('train preciznost: {}'.format(train_acc))
+print('test preciznost: {}'.format(test_acc))
+\end{lstlisting}
+
+Preciznost je jako lo\v sa kada se koristi i ovaj algoritam.
+\begin{verbatim}
+train preciznost: 0.6
+test preciznost: 0.30303030303030304
+\end{verbatim}
+
+Izve\v staj i matricu konfuzije mo\v zemo dobiti na slede\' ci na\v cin:
+
+\begin{lstlisting}
+test_rep = sklearn.metrics.classification_report(y_test, y_test_predicted)
+train_rep = sklearn.metrics.classification_report(y_train, y_train_predicted)
+print("\nTest izvestaj:\n{}".format(test_rep))
+print("Trening izvestaj:\n{}".format(train_rep))
+
+train_conf = sklearn.metrics.confusion_matrix(y_train, y_train_predicted)
+test_conf = sklearn.metrics.confusion_matrix(y_test, y_test_predicted)
+print("Matrica konfuzije za skup za obucavanje:\n{}".format(train_conf))
+print("\nMatrica konfuzije za skup za testiranje:\n{}".format(test_conf))
+\end{lstlisting}
+
+\begin{verbatim}
+Test izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.25      0.33      0.29         3
+          1       0.47      0.50      0.48        14
+          2       0.25      0.09      0.13        11
+          3       0.10      0.20      0.13         5
+
+avg / total       0.32      0.30      0.30        33
+
+Train izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.57      0.33      0.42        12
+          1       0.55      0.92      0.69        25
+          2       0.75      0.32      0.44        19
+          3       0.67      0.63      0.65        19
+
+avg / total       0.63      0.60      0.57        75
+
+Matrica konfuzije za skup za obucavanje:
+[[ 4  8  0  0]
+ [ 1 23  0  1]
+ [ 2  6  6  5]
+ [ 0  5  2 12]]
+
+Matrica konfuzije za skup za testiranje:
+[[1 1 1 0]
+ [1 7 0 6]
+ [2 5 1 3]
+ [0 2 2 1]]
+\end{verbatim}
+
+\subsection{Klasifikacija kori\v s\' cenjem stabla odlu\v civanja (kriterijum: Ginijev indeks)}
+
+\begin{verbatim}
+Velicina skupa za obucavanje: 225
+Velicina skupa za testiranje: 99
+\end{verbatim}
+
+\begin{lstlisting}
+# vrsi se klasifikacija koriscenjem Ginijevog indeksa
+clf = DecisionTreeClassifier(criterion='gini')
+
+# Treniramo model
+clf.fit(X_train, y_train.values.ravel())
+
+# Vrsimo predikciju
+y_test_predicted = clf.predict(X_test)
+y_train_predicted = clf.predict(X_train)
+
+# Izracunavamo preciznost
+train_acc = clf.score(X_train, y_train)
+test_acc = clf.score(X_test, y_test)
+print('train preciznost: {}'.format(train_acc))
+print('test preciznost: {}'.format(test_acc))
+\end{lstlisting}
+
+Preciznost je jako lo\v sa kada se koristi i ovaj algoritam, pribli\v zna onoj kada je parametar koji se zadaje algoritmu za stabla odlu\v civanja entropija.
+\begin{verbatim}
+train preciznost: 0.6133333333333333
+test preciznost: 0.3333333333333333
+\end{verbatim}
+
+Izve\v staj i matricu konfuzije mo\v zemo dobiti na slede\' ci na\v cin:
+
+\begin{lstlisting}
+test_rep = sklearn.metrics.classification_report(y_test, y_test_predicted)
+train_rep = sklearn.metrics.classification_report(y_train, y_train_predicted)
+print("\nTest izvestaj:\n{}".format(test_rep))
+print("Trening izvestaj:\n{}".format(train_rep))
+
+train_conf = sklearn.metrics.confusion_matrix(y_train, y_train_predicted)
+test_conf = sklearn.metrics.confusion_matrix(y_test, y_test_predicted)
+print("Matrica konfuzije za skup za obucavanje:\n{}".format(train_conf))
+print("\nMatrica konfuzije za skup za testiranje:\n{}".format(test_conf))
+\end{lstlisting}
+
+\begin{verbatim}
+Test izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.14      0.50      0.22         2
+          1       0.47      0.58      0.52        12
+          2       0.38      0.23      0.29        13
+          3       0.00      0.00      0.00         6
+
+avg / total       0.33      0.33      0.31        33
+
+Train izvestaj:
+             precision    recall  f1-score   support
+
+          0       0.50      0.62      0.55        13
+          1       0.62      0.78      0.69        27
+          2       0.62      0.47      0.53        17
+          3       0.75      0.50      0.60        18
+
+avg / total       0.63      0.61      0.61        75
+
+Matrica konfuzije za skup za obucavanje:
+[[ 8  4  1  0]
+ [ 4 21  1  1]
+ [ 3  4  8  2]
+ [ 1  5  3  9]]
+
+Matrica konfuzije za skup za testiranje:
+[[1 1 0 0]
+ [3 7 1 1]
+ [3 5 3 2]
+ [0 2 4 0]]
+\end{verbatim}
+
+\newpage
+
+\section{Klasterovanje}
+
+\subsection{Algoritam $K$-sredina}
+Proba\' cemo da klasterujemo podatke na osnovu nekoliko relevantnih atributa.
+\\
+\begin{lstlisting}[mathescape=true]
+# podaci se ucitavaju
+df = pd.read_csv('./food-choices/food_coded.csv')
+
+# podaci se sredjuju za koriscenje
+data = data[data['weight'].apply(lambda x: str(x).isdigit())]
+Y = data[['Gender', 'eating_out']]
+X = data[['weight']]
+\end{lstlisting}
+
+Za po\v cetak, treba nam broj klastera. Postoji kriva, takozvana elbow curve koja se koristi kao pomo\' c pri odre\dj ivanju broja klastera.\\
+Tra\v zi se mesto na kom se kriva drasti\v cno prelama i ne napreduje. To nam govori da ve\' ci broj klastera od broja na  ne bi ni\v sta zna\v cajno doneo, ne bi ni\v sta bolje objasnio, rasporedio podatke. 
+
+\begin{lstlisting}[mathescape=true]
+# pravi se niz od 20 brojeva
+# 20 puta se primeni algoritam K-sredina
+# za razlicit broj klastera - od 0 do 20
+
+n = range(1, 20)
+kmeans = [KMeans(n_clusters=i) for i in n]
+  
+score = [kmeans[i].fit(Y).score(Y) for i in range(len(kmeans))]
+
+# dobijeni rezultati se iscrtavaju
+
+plt.plot(n, score)
+plt.xlabel('Broj klastera')
+plt.ylabel('Score')
+plt.title('Elbow Curve')
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{elbow_curve.png}
+\end{figure}
+
+Sa slike se ne mo\v ze jasno videti koja je ta\v cka ona koja nam ta\v cno mo\v ze odrediti broj klastera. Ovaj slu\v caj se u praksi \v cesto de\v sava i tada se koriste Bartletov (eng. Bartlette) i Levenijev (eng. Levene) test.
+\\
+Kako se dvoumimo oko 2 ta\v cke, pokrenu\' cemo algoritam za obe i videti koja klaster analiza izgleda bolje.
+\\
+\begin{lstlisting}[mathescape=true]
+# PCA algoritam se koristi da bi 
+# se podaci koji su mozda
+# previse rasprseni
+# pretvorili u linearne kombinacije
+# i na taj nacin bili lakse citljivi
+
+pca = PCA(n_components=2).fit(Y)
+pca_d = pca.transform(Y)
+pca_c = pca.transform(X)
+
+kmeans = KMeans(n_clusters=8)
+
+# za rasporedjivanje podataka
+# u 3 klastera bi se prethodna linija
+# zamenila narednom zakomentarisanom linijom
+# kmeans = KMeans(n_clusters=3)
+
+kmeansoutput = kmeans.fit(Y)
+
+# mogu se pogledati vrednosti
+# krajnjih centroida
+
+print(kmeans.cluster_centers_)
+\end{lstlisting}
+
+Dobijeni centroidi za 8 klastera su:
+
+\begin{verbatim}
+[[2.     2.    ]
+ [1.6875 4.75  ]
+ [1.     3.    ]
+ [1.     2.    ]
+ [1.     4.    ]
+ [1.     1.    ]
+ [2.     1.    ]
+ [2.     3.    ]]
+\end{verbatim}
+
+Dobijeni centroidi za 3 klastera su:
+
+\begin{verbatim}
+[[1.775      1.625     ]
+ [1.09090909 2.4       ]
+ [1.44       4.48      ]]
+\end{verbatim}
+
+\begin{lstlisting}[mathescape=true]
+# klasteri se prikazuju
+
+plt.figure('8 klastera K-Means')
+plt.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
+plt.xlabel('Tezina')
+plt.ylabel('Konzumiranje prekomernih kolicina hrane i pol')
+plt.title('8 klastera K-Means')
+plt.show()
+\end{lstlisting}
+
+\begin{lstlisting}[mathescape=true]
+plt.figure('3 klastera K-Means')
+plt.scatter(pca_c[:, 0], pca_d[:, 0], c=kmeansoutput.labels_)
+plt.xlabel('Tezina')
+plt.ylabel('Konzumiranje prekomernih kolicina hrane i pol')
+plt.title('3 klastera K-Means')
+plt.show()
+\end{lstlisting}
+
+Dobijeni klasteri kada sa algoritam $K$-sredina pokrene za 8 i za 3 klastera: 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{k-means.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{cluster-3.png}
+\end{figure}
 
 \newpage
 
@@ -764,5 +1132,40 @@ plt.show()
 \end{figure}
 
 Na osnovu grafika zaklju\v cujemo da najve\' ci broj ispitanika ima izme\dj u 58.5kg i 70kg.
+
+\newpage
+
+\section{Pravila pridru\v zivanja}
+
+Za pravila pridru\v zivanja je kori\v s\' cen alat Knime.\\
+
+Koriste\' ci \v cvorove CSV Reader za u\v citavanje skupa podataka, Column Filter za odabir atributa nad kojima \v zelimo da primenimo pravila pridru\v zivanja, Missing Value i Missing Value Apply kako bismo se pobrinuli o nedostaju\' cim vrednostima, Create Collection Column za pravljenje liste od odabranih atributa i Association Rule Learner kako bismo prona\v sli \v ceste skupove, poku\v sa\' cemo da prona\dj emo neke \v ceste skupove.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{knime}
+\end{figure}
+
+Kako u skupu postoji veliki broj nedostaju\' cih vrednosti, biraju\' ci da ih uklonimo bismo izgubili veliki broj podataka koji nam u ovom slu\v caju mogao biti od koristi. Zato su za sve nedostaju\' ce vrednosti zamenjene najfrekventnijim vrednostima iz odgovaraju\' cih kolona.
+\newpage
+
+Atributi za koje je smatrano da bi mogli biti u korelaciji su pol, te\v zina, sport kojim se bave, hrana koju vole da jedu, iz kog razloga jedu hranu za utehu, omiljena kuhinja, koliko je za njih \v zivot ispunjavaju\' c, kako im se promenio na\v cin ishrane od kad su na koled\v zu i \v sta za njih predstavlja zdrav obrok.\\
+Odabir atributa: 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{conf}
+\end{figure}
+
+\newpage
+Dobijena pravila pridu\v zivanja:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=15cm]{rules}
+\end{figure}
+
+Kao \v sto se mo\v ze videti, nijedno pravilo nije od velikog zna\v caja jer lift mera nijednog pravila ne odstupa od jedinice za neku zna\v cajnu vrednost.
+Ipak, ne\v sto se mo\v ze zaklju\v citi iz pravila na osnovu pojavljivanja odre\dj enih vrednosti: kao i do sada, italijanska hrana je ubedljivo naj\v ce\v s\' ci odgovor kada je se radi o omiljenoj hrani ispitanika, a sport koji se naj\v ce\v s\' ce pojavljuje kao onaj kojim se bave je hokej. 
 
 \end{document}

@@ -6,7 +6,7 @@ from pandas.plotting import scatter_matrix
 import seaborn
 
 def main():
-	data = pd.read_csv("./food_coded.csv", na_values="none")
+	data = pd.read_csv('./food-choices/food_coded.csv', na_values="none")
 	
 	print(data.shape)
 	print(data.columns)
